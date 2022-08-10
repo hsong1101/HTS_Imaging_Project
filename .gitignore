@@ -1,0 +1,5 @@
+archive/
+data/
+__pycache__
+use_this_for_pip_install.ipynb
+.ipynb_checkpoints
