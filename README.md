@@ -95,11 +95,11 @@ The image preprocessing pipeline involves the extraction of the raw, 0 hour well
 OpenCV, an open source, computer vision python library is then used to perform pixel clustering to generate contours for the region of interest for each image. 
 Using various thresholds, we were able to create consistent masking of the cell culture well interiors, generating 448 x 448 png images.
 
-<img src="plots/Extraction.png" alt="Extraction Process of an image" width="1000" height="300"/>
+<img src="plots/Extraction.png" alt="Extraction Process of an image" width="1000" height="200"/>
 
 Among around 5,000 images, 3,892 cell images were extracted without any issues.
 
-<img src="plots/Extracted.png" alt="Extracted cell images" width="500" height="500"/>
+<img src="plots/Extracted_Cells.png" alt="Extracted cell images" width="500" height="500"/>
 
 Still among those that have been successfully extracted, we had to make sure that those images were usable, meaning not too dark or too bright.
 Using +/- two stadard deviations from the mean, we looked for any outliers and next are the examples.
