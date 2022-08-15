@@ -10,14 +10,12 @@
 - [Technologies](#technologies)
 - [About the Project](#about-the-project)
   * [Problem Statement](#problem-statement)
-  * [Justification](#justification)
 - [Data Exploration](#data-exploration)
   * [Original Data](#original-data)
    - [Data Set Files](#data-set-files)
  - [Data Preparation](#data-preparation)
-- [Model Training](#Model-training)
-- [Model Strategies](#model-strategies)
-- [Presentations and Reports](#presentations-and-reports)
+- [Model Training](#model-training)
+- [Model Strategies](#model-training-strategies)
 - [Code](#code)
 - [Conclusion](#conclusion)
 - [References](#references)
@@ -51,7 +49,7 @@ For our research use-case, the women’s reproductive health study led by Dr. Le
 The study uses harvested endometrial cells from several primates and cultured in small vessels known as wells. For each test run, a group of wells is given a precisely controlled number of endometrial cells. 
 Certain wells are then treated with different drugs and doses, recorded using photography at fixed intervals of 0 hours, 12 hours, 24 hours, 48 hours, 72 hours, and 96 hours in the following chart. 
 
-<img src="Run.png" alt="A Run Cells" width="500" height="500"/>
+<img src="Run.png" alt="A Run Cells" width="800" height="500"/>
 
 Mucus formation along the exterior wall is formed, known as the meniscus. The amount of meniscus produced is directly correlated with a woman’s receptiveness to pregnancy. The correct combination of drugs and doses that affect meniscus production can potentially be used as an effective contraceptive protocol, without the side effects associated with hormone-based contraceptive methods.
 
@@ -60,16 +58,17 @@ Mucus formation along the exterior wall is formed, known as the meniscus. The am
 A significant issue was discovered in the course of the OHSU research study. In almost every run, large variability in results occurs at the 96-hour interval. 
 Wells that have been treated exactly the same, (same number of cells, treatment and time) can produce dramatically different results as shown in the following picture.
 
-![Cells over time](Process.png)
+<img src="Process.png" alt="Cells over time" width="500" height="300"/>
+
 
 The well with abnormal results must then be discarded, potentially wasting 96 hours of an experiment run.
 Our motivation is to conduct a project that involves solving a highly complex problem utilizing computer vision. 
 Our hope for this project is to leverage deep convolutional models to streamline the process of identifying viable wells and predict whether a well should be rejected early in a run. 
 This will not only save time for the research study but will also potentially remove human error associated with manual checking of wells that are out of range. 
 
-As an example in the next chart, we can see that there is no visible or clear distinction between those cells marked as **OMIT** and **KEEP**.
+As an example in the next chart, we can see that there is no visible or clear distinction between those cells marked as **OMIT**(Left) and **KEEP**(Right).
 
-![Comparison](Comparison.png)
+<img src="Comparison.png" alt="Comparison" width="300" height="500"/>
 
 When researchers were conducting experiments, they didn't put much focus on the structures of cells but rather the combinations of drugs as they are the main sources affecting the outcome.
 However, after seeing many occasions where same amount of drugs with the same combinations gave different outputs, they suspected that maybe the structure of each cell affects the results as well which we are trying to explore in this project.
@@ -97,16 +96,16 @@ The image preprocessing pipeline involves the extraction of the raw, 0 hour well
 OpenCV, an open source, computer vision python library is then used to perform pixel clustering to generate contours for the region of interest for each image. 
 Using various thresholds, we were able to create consistent masking of the cell culture well interiors, generating 448 x 448 png images.
 
-![Extraction Process of an image](Extraction.png)
+<img src="Extraction.png" alt="Extraction Process of an image" width="800" height="150"/>
 
 Among around 5,000 images, 3,892 cell images were extracted without any issues.
 
-![Extracted cell images](Extracted.png)
+<img src="Extracted.png" alt="Extracted cell images" width="500" height="500"/>
 
 Still, among those that have been successfully extracted, we had to make sure that those images were usable, meaning not too dark or too bright.
 Using +/- two stadard deviations from the mean, we looked for any outliers and next are the examples.
 
-![outliers](Outliers.png)
+<img src="Outliers.png" alt="outliers" width="500" height="300"/>
 
 It's easy to see that there are some disturbances outside the well. Using this logic, we excluded any outliers there are. 
 There may be a better approach to address this problem. However, given the tight schedule, we had to choose this method.
@@ -181,6 +180,23 @@ We would like to further refine this project as time allows by:
 https://github.com/hsong1101/HTS_Imaging_Project
 
 
+# References
+Allaoui, M., Kherfi, M. L., & Cheriet, A. (2020, June). Considerably improving clustering algorithms using UMAP dimensionality reduction technique: A comparative study. In A. El Moataz, D. Mammass, A. Mansouri, & F. Nouboud (Eds.) International Conference on Image and Signal Processing (pp. 317–325). Springer.
 
+Din, N. U., & Yu, J. (2021). Training a deep learning model for single-cell segmentation without manual annotation. Scientific Reports, 11(1), 1–10. https://doi.org/10.1038/s41598-021-03299-4 
+
+Dosovitskiy, A., Springenberg, J. T., Riedmiller, M., & Brox, T. (2014). Discriminative unsupervised feature learning with convolutional neural networks. Proceedings of the 27th International Conference on Neural Information Processing Systems - Volume 1, 766–774. Παρουσιάστηκε στο Montreal, Canada. MIT Press.
+
+Hiramatsu, Y., Hotta, K., Imanishi, A., Matsuda, M., & Terai, K. (2018). Cell image segmentation by integrating multiple CNNs [Conference paper]. Computer Vision and Pattern Recognition, Salt Lake City, UT. https://doi.org/10.1109/CVPRW.2018.00296 
+
+Mahmood, A., Ospina, A. G., Bennamoun, M., An, S., Sohel, F., Boussaid, F., Hovey, R., Fisher, R. B., & Kendrick, G. A. (2020). Automatic hierarchical classification of kelps using deep residual features. Sensors, 20(2), 447. https://doi.org/10.3390/s20020447 
+
+Raghu, M., Zhang, C., Brain, G., Kleinberg, J., & Bengio, S. (2019). Transfusion: Understanding transfer learning for medical imaging [Conference paper]. 33rd Conference on Neural Information Processing Systems, Vancouver, BC. https://doi.org/10.48550/arXiv.1902.07208
+
+Sofaer, H. R., Hoeting, J. A., & Jarnevich, C. S. (2019). The area under the precision‐recall curve as a performance metric for rare binary events. Methods in Ecology and Evolution, 10(4), 565–577.
+
+Vocaturo, E., Zumpano, E., & Veltri, P. (2018, December). Image pre-processing in computer vision systems for melanoma detection. In 2018 IEEE International Conference on Bioinformatics and Biomedicine (BIBM) (pp. 2117-2124). IEEE.
+
+Zhang, Q., Wu, Y., & Zhu, S. (2018). Interpretable convolutional neural networks [Conference paper]. Computer Vision and Pattern Recognition, Salt Lake City, UT. https://openaccess.thecvf.com/content_cvpr_2018/html/Zhang_Interpretable_Convolutional_Neural_CVPR_2018_paper.html 
 
 
