@@ -31,7 +31,7 @@
 To clone this repository onto your device, use the commands below:
 
 	1. git init
-	2. git clone git@github.com:https://github.com/hsong1101/HTS_Imaging_Project
+	2. git clone https://github.com/hsong1101/HTS_Imaging_Project.git
 
 ## Technologies
 
