@@ -49,7 +49,7 @@ For our research use-case, the women’s reproductive health study led by Dr. Le
 The study uses harvested endometrial cells from several primates and cultured in small vessels known as wells. For each test run, a group of wells is given a precisely controlled number of endometrial cells. 
 Certain wells are then treated with different drugs and doses, recorded using photography at fixed intervals of 0 hours, 12 hours, 24 hours, 48 hours, 72 hours, and 96 hours in the following chart. 
 
-<img src="Run.png" alt="A Run Cells" width="800" height="500"/>
+<img src="plots/Run.png" alt="A Run Cells" width="800" height="500"/>
 
 Mucus formation along the exterior wall is formed, known as the meniscus. The amount of meniscus produced is directly correlated with a woman’s receptiveness to pregnancy. The correct combination of drugs and doses that affect meniscus production can potentially be used as an effective contraceptive protocol, without the side effects associated with hormone-based contraceptive methods.
 
@@ -58,7 +58,7 @@ Mucus formation along the exterior wall is formed, known as the meniscus. The am
 A significant issue was discovered in the course of the OHSU research study. In almost every run, large variability in results occurs at the 96-hour interval. 
 Wells that have been treated exactly the same, (same number of cells, treatment and time) can produce dramatically different results as shown in the following picture.
 
-<img src="Process.png" alt="Cells over time" width="500" height="300"/>
+<img src="plots/Process.png" alt="Cells over time" width="500" height="300"/>
 
 
 The well with abnormal results must then be discarded, potentially wasting 96 hours of an experiment run.
@@ -68,7 +68,7 @@ This will not only save time for the research study but will also potentially re
 
 As an example in the next chart, we can see that there is no visible or clear distinction between those cells marked as **OMIT**(Left) and **KEEP**(Right).
 
-<img src="Comparison.png" alt="Comparison" width="300" height="500"/>
+<img src="plots/Comparison.png" alt="Comparison" width="300" height="500"/>
 
 When researchers were conducting experiments, they didn't put much focus on the structures of cells but rather the combinations of drugs as they are the main sources affecting the outcome.
 However, after seeing many occasions where same amount of drugs with the same combinations gave different outputs, they suspected that maybe the structure of each cell affects the results as well which we are trying to explore in this project.
@@ -96,16 +96,16 @@ The image preprocessing pipeline involves the extraction of the raw, 0 hour well
 OpenCV, an open source, computer vision python library is then used to perform pixel clustering to generate contours for the region of interest for each image. 
 Using various thresholds, we were able to create consistent masking of the cell culture well interiors, generating 448 x 448 png images.
 
-<img src="Extraction.png" alt="Extraction Process of an image" width="800" height="150"/>
+<img src="plots/Extraction.png" alt="Extraction Process of an image" width="800" height="150"/>
 
 Among around 5,000 images, 3,892 cell images were extracted without any issues.
 
-<img src="Extracted.png" alt="Extracted cell images" width="500" height="500"/>
+<img src="plots/Extracted.png" alt="Extracted cell images" width="500" height="500"/>
 
 Still, among those that have been successfully extracted, we had to make sure that those images were usable, meaning not too dark or too bright.
 Using +/- two stadard deviations from the mean, we looked for any outliers and next are the examples.
 
-<img src="Outliers.png" alt="outliers" width="500" height="300"/>
+<img src="plots/Outliers.png" alt="outliers" width="500" height="300"/>
 
 It's easy to see that there are some disturbances outside the well. Using this logic, we excluded any outliers there are. 
 There may be a better approach to address this problem. However, given the tight schedule, we had to choose this method.
