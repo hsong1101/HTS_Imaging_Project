@@ -51,7 +51,7 @@ For our research use-case, the women’s reproductive health study led by Dr. Le
 The study uses harvested endometrial cells from several primates and cultured in small vessels known as wells. For each test run, a group of wells is given a precisely controlled number of endometrial cells. 
 Certain wells are then treated with different drugs and doses, recorded using photography at fixed intervals of 0 hours, 12 hours, 24 hours, 48 hours, 72 hours, and 96 hours in the following chart. 
 
-![A Run Cells](Run.png)
+<img src="Run.png" alt="A Run Cells" width="500" height="500"/>
 
 Mucus formation along the exterior wall is formed, known as the meniscus. The amount of meniscus produced is directly correlated with a woman’s receptiveness to pregnancy. The correct combination of drugs and doses that affect meniscus production can potentially be used as an effective contraceptive protocol, without the side effects associated with hormone-based contraceptive methods.
 
