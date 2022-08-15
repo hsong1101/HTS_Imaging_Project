@@ -10,10 +10,9 @@
 - [Technologies](#technologies)
 - [About the Project](#about-the-project)
   * [Problem Statement](#problem-statement)
-- [Data Exploration](#data-exploration)
+- [Data Exploration and Preparation](#data-exploration-and-preparation)
   * [Original Data](#original-data)
    - [Data Set Files](#data-set-files)
- - [Data Preparation](#data-preparation)
 - [Model Training](#model-training)
 - [Model Strategies](#model-training-strategies)
 - [Code](#code)
@@ -74,7 +73,7 @@ When researchers were conducting experiments, they didn't put much focus on the 
 However, after seeing many occasions where same amount of drugs with the same combinations gave different outputs, they suspected that maybe the structure of each cell affects the results as well which we are trying to explore in this project.
 
 
-# Data Exploration
+# Data Exploration and Preparation
 
 ## Original Data 
 
@@ -86,7 +85,7 @@ High Throughput Screen (HTS) Culture Surface Hydration Image dataset
 The Dataset is part of ongoing research at Oregon Health and Sciences University and is not publicly available.
 
 
-# Data Preparation
+## Image Processing
 
 The HTS Imaging Dataset from the OHSU research study consists of 80 experimental runs, each composed of 96 images of cell culture wells at the experiment’s 0 hour. 
 However, we noticed that not all runs have corresponding 0 hr cell images. Some runs skipped capturing those 0 hr images which later runs included after the protocol had changed.
