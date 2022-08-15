@@ -33,177 +33,128 @@
 To clone this repository onto your device, use the commands below:
 
 	1. git init
-	2. git clone git@github.com:https://github.com/zeegeeko/ADS509-Topic-Modeling
+	2. git clone git@github.com:https://github.com/hsong1101/HTS_Imaging_Project
 
 ## Technologies
 
 - Python
-  - Pre-Trained BERT Model (large-uncased)
+  - Pre-Trained RESNET50 from torchvision PyTorch library
   - Scikit Learn
-  - Gensim
-  - Selenium (web scraping)
-    - Chromium 
-  - BeautifulSoup
+  - imblearn
 - Jupyter Lab
-- Amazon S3
+- AWS S3
 
 
 # About the Project
 
-This project's primary goal is to predict the ratings given to a film by the Rotten 
-Tomatoes audience. We will be gathering data from EIDR (The Entertainment Identifier Registry Association) 
-to pull a large number of industry standard, movie identifiers. The identifiers will then be used
-to cross-reference against titles on Rotten Tomatoes, where we will employ web-scraping techniques
-to gather each movie title's synopsis, audience scores, genres and other metadata. Our hope
-is to be able to leverage text-mining techniques on the movie synopsis data in order to gain 
-insights and identify the potential relationships between keywords, topics, semantics that may
-exist in a given movie's premise gleaned from its synopsis. From the results of text-mining, 
-we can then use the salient features to train a classification model to approximate the Rotten Tomatoes' audience
-response in the form a 1-5 star rating. Accurate predictions can aid movie studios, producers, directors, writers,
-etc. in aligning business goals with audience expectations.
+For our research use-case, the women’s reproductive health study led by Dr. Leo Han at The Oregon Health and Sciences University (OHSU) is conducting a study to develop a hormoneless contraceptives protocol. 
+The study uses harvested endometrial cells from several primates and cultured in small vessels known as wells. For each test run, a group of wells is given a precisely controlled number of endometrial cells. 
+Certain wells are then treated with different drugs and doses, recorded using photography at fixed intervals of 0 hours, 12 hours, 24 hours, 48 hours, 72 hours, and 96 hours in the following chart. 
+
+![A Run Cells](Run.png)
+
+Mucus formation along the exterior wall is formed, known as the meniscus. The amount of meniscus produced is directly correlated with a woman’s receptiveness to pregnancy. The correct combination of drugs and doses that affect meniscus production can potentially be used as an effective contraceptive protocol, without the side effects associated with hormone-based contraceptive methods.
 
 ## Problem Statement
 
-The global film industry is a market worth well over $100 billion according to the 
-Motion Picture Association report in 2019. Global revenue from box-office sales totaling $42.2 billion
-and streaming, home/mobile entertainment at $58.8 billion. Despite COViD-19 dropping in-theater
-sales by 82%, the growth of streaming service amounted to a 37% increase in 2020 and still 
-expected a compounded annual growth rate of 21% from 2021 to 2028. 
+A significant issue was discovered in the course of the OHSU research study. In almost every run, large variability in results occurs at the 96-hour interval. 
+Wells that have been treated exactly the same, (same number of cells, treatment and time) can produce dramatically different results as shown in the following picture.
 
-With steady growth of consumers of video entertainment, in both theaters and now on-demand 
-streaming services, steady delivery of quality content is vital to the industry's continued
-success. With the cost of producing a movie or show reaching from tens to hundreds of millions
-of dollars, it is important for studios to maximize the returns on such large investments. Therefore
-it is imperative that studios, producers, directors, writers, etc. can properly predict the
-response of their audience. Sites like Rotten Tomatoes and Metacritic have become the de-facto
-standard in movie and show ratings, providing scores from both professional critics and the
-general audience. 
+![Cells over time](Process.png)
 
-With Rotten Tomatoes having over 30 million unique visitors a month, they
-are well positioned to influence viewership. The goal of this project is to provide an easy-to-use
-tool that can predict the ratings of a Rotten Tomatoes audience based on the synopsis of a 
-movie or show. This tool can be leveraged by studios, producers, writers, etc. to make adjustments
-to their content to better suit their audience or modulate expectations to improve content quality, increase
-viewership and maximize return on investments.
+The well with abnormal results must then be discarded, potentially wasting 96 hours of an experiment run.
+Our motivation is to conduct a project that involves solving a highly complex problem utilizing computer vision. 
+Our hope for this project is to leverage deep convolutional models to streamline the process of identifying viable wells and predict whether a well should be rejected early in a run. 
+This will not only save time for the research study but will also potentially remove human error associated with manual checking of wells that are out of range. 
 
-**Sources**  
-Rosal, M.-L. (2022). U.S. film industry statistics [2022]: Facts about the U.S. film industry. Zippia. Retrieved from https://www.zippia.com/advice/us-film-industry-statistics/   
+As an example in the next chart, we can see that there is no visible or clear distinction between those cells marked as **OMIT** and **KEEP**.
 
-Escandon, R. (2020, March 13). The film industry made a record-breaking $100 billion last year. Forbes. Retrieved from https://www.forbes.com/sites/rosaescandon/2020/03/12/the-film-industry-made-a-record-breaking-100-billion-last-year/?sh=311a6cf234cd 
+![Comparison](Comparison.png)
 
-## Justification
+When researchers were conducting experiments, they didn't put much focus on the structures of cells but rather the combinations of drugs as they are the main sources affecting the outcome.
+However, after seeing many occasions where same amount of drugs with the same combinations gave different outputs, they suspected that maybe the structure of each cell affects the results as well which we are trying to explore in this project.
 
-Ratings from sites such as Rotten Tomatoes and Metacritic are important indicators for the
-success or failure of a movie or show. With over 30 million unique visitors a month, these sites
-have tremendous influence and having the ability to predict the response of these audiences to 
-a movie or show before release, can provide an opportunity for studios, producers, directors, writters, etc.
-to improve their content.
 
 # Data Exploration
 
-
-We scraped 84,219 movie titles from EIDR but only managed to scrape 17,313 movie data from 
-Rotten Tomatoes. Rotten Tomatoes data is missing 202 synopsis entries and the number of rows 
-missing for audience scores is 2,303. There are 15 column totals, 2 index columns, 2 date columns, 
-3 numerical columns. Genre column has 23 unique values but will be converted to 7 distinct genres 
-and is nominal valued. Rating is missing 12,380 values and will most likely be dropped. Synopsis 
-is text data that will be the primary focus of our text-mining efforts. There are total of 17,050 fully 
-populated rows and 16,315 of those are in English language.
-
-
 ## Original Data 
 
-EIDR source: https://ui.eidr.org/search  
-Rotten Tomatoes: http://www.rottentomatoes.com
+High Throughput Screen (HTS) Culture Surface Hydration Image dataset
 
 
 ## Data Set Files
 
-The dataset is in two files one for the EIDR listings and one for the Rotten Tomatoes
-movie data scrape. Both files are in CSV format and stored on Amazone S3.
+The Dataset is part of ongoing research at Oregon Health and Sciences University and is not publicly available.
 
-**EIDR Scrape**  
-https://usd-mads-projects.s3.us-west-1.amazonaws.com/ADS509/EIDR+Data.csv
-
-**Rotten Tomatoes Scrape**  
-https://usd-mads-projects.s3.us-west-1.amazonaws.com/ADS509/RT+Data.csv  
 
 # Data Preparation
 
-The main focus of this project is to develop a model to predict ratings based on the title's synopsis, so 
-the synopsis data will be the most important part of the dataset. Other features such as 
-genre, runtime will also be used against the score_audience ratings. 
+The HTS Imaging Dataset from the OHSU research study consists of 80 experimental runs, each composed of 96 images of cell culture wells at the experiment’s 0 hour. 
+However, we noticed that not all runs have corresponding 0 hr cell images. Some runs skipped capturing those 0 hr images which later runs included after the protocol had changed.
+Associated tabular data containing the run’s results such as meniscus widths, drug types and amounts, cell culture well position and a binary OMIT column as the resulting viability of the cell culture well after the entire 96 hour run.
 
-Since we wanted to generate more "ball-park" ratings predictions, we decided to bin the audience
-scores of 0-100 into 5 bins which allows us to turn this into a multi-class classification problem.
-We binned the 0-100 Rotten Tomatoes audience scores as followed.  
+The image preprocessing pipeline involves the extraction of the raw, 0 hour well images and converted into single channel grayscale images. 
+OpenCV, an open source, computer vision python library is then used to perform pixel clustering to generate contours for the region of interest for each image. 
+Using various thresholds, we were able to create consistent masking of the cell culture well interiors, generating 448 x 448 png images.
 
-- 1 Star: ~ 20%
-- 2 Star: 21% - 40%
-- 3 Star: 41% - 60%
-- 4 Star: 61% - 80%
-- 5 Star: 81% - 100%
+![Extraction Process of an image](Extraction.png)
 
-Release dates for the data are not to be used as features since the tool will be designed to 
-predict audience scores (by Stars) of unreleased or titles still in production. However, the 
-theatrical release dates and the streaming release dates were converted from dates to number of 
-days since released for data analysis purposes only. 
+Among around 5,000 images, 3,892 cell images were extracted without any issues.
 
-Since we require both audience scores (target) and synopsis data, we removed all rows that had either
-null scores or null synopses. We decided againt score imputation in order to prevent any form
-of bias to be introduced. After cleaning the dataset was reduced to 17,050 rows.
+![Extracted cell images](Extracted.png)
 
-We found that the 27 genres from the Rotten Tomatoes data was not distinct enough and can be 
-condensed. Genres that appeared less than 100 times such as fitness, anime and stand-up was combined
-into a genre called other. After condensing we ended up with 11 distinct genres and then one-hot-encoded.
+Still, among those that have been successfully extracted, we had to make sure that those images were usable, meaning not too dark or too bright.
+Using +/- two stadard deviations from the mean, we looked for any outliers and next are the examples.
 
-For the synopsis data, we created 2 forms of preprocessing, lemmatized_tokens and bert_tokens. This 
-was done due to the differences in processing requirements for Topic Modeling and encoding using the
-Bi-directional Encoders Representations from Transformers (BERT) model. For topic modeling, we stripped
-punctuation, lower-cased, removed stop-words and lemmetized or stemmed words. For BERT, since 
-contextual information is encoded, we performed very minimal processing, lower-casing and tokenizing.
+![outliers](Outliers.png)
+
+It's easy to see that there are some disturbances outside the well. Using this logic, we excluded any outliers there are. 
+There may be a better approach to address this problem. However, given the tight schedule, we had to choose this method.
+
+After the extraction, to compensate the lack of training data, we augmented by randomly flipping or rotation the images. 
 
 
 # Model Training
 
-The data outlined in the Data Preparation step is only a preliminary step before classification models can be trained.
-Other models are used in an unsupervised manner for text-mining are utilized in order to generate
-salient features to be used for the classification model.
+Due to the limited amount of training image data and limited computational resources, the modeling
+approach is in two parts. First, a pretrained CNN model to be used as a feature extractor, excluding output 
+from the fully connected, classification layers. Second, a traditional ML classifier to be trained using the
+embeddings from the CNN model as features. These two models will be running in sequence, hence, sequential hybrid 
+model.
 
-**Topic Modeling**  
-Latent Dirichlet Allocation (LDA) is a unsupervised technique for generating topics. The discovered
-topics will be used to generate topic probability distributions for each movie synopsis in our dataset as a 
-feature. The LDA model was able to identify 7 optimal topics based on coherence scores. 
+**CNN Model**
+The chosen pretrained CNN model is the RESNET50 convolutional neural network. The RESNET50 is provided by
+PyTorch's torchvision library and is trained on the IMAGENET1K_V2 image dataset used for object detection.
+The model consists of 48 convolutional layers, 1 maxpool layer and 1 average pool layer. Embeddings will be 
+extracted from the last convolutional layer, resulting in 2,048 length vector embeddings to be used as input
+for the traditional ML classifier.
 
-**BERT Model**  
-We wanted to also encode contextual information from the synopsis data to use as a feature. The 
-pretrained BERT (large, uncased) model was used to encode each synopsis into a 768 length vector
-embedding that will be used as features for the classification modeling.
-
-**Classification Models**  
-The classification model will perform the actual rating prediction. The training set for the 
-classification model includes the 768 column BERT embedding, 7 topic probabilities, 11 genres and runtime. The target
-is the binned audience score of 1-5 stars. The dataset was then split into training and validation sets using
-a 75/25 split. Since there is a large class imbalance with 5 stars only representing less than 3% of the dataset, we
-utilized SMOTE to evenly balance all the classes.
-
+**Classification Models**
 The classification models that were trained and tuned are:
-- Linear Discriminant Analysis
-- Quadratic Discriminant Analysis
-- Logistic Regression (Multinomial)
-- Random Forest
-- K-Nearest Neighbors
+
+Linear Classifiers   
+- Logistic Regression
 - Support Vector Machines
 
-# Model Strategies 
+Generative Models
+- Linear Discriminant Analysis
+- Quadratic Discriminant Analysis
+- Naive Bayes
+
+Trees and Ensemble Models
+- Decision Trees
+- Random Forests
+- XGBoost
+
+# Model Training Strategies 
 
 All models were trained using 5-fold cross validation and models with hyper-parameters were
-trained and evaluated across various parameters for tuning. The tunings with the highest testing
-accuracy were then selected as candidate models for further evaluation
+tuned using a grid search pattern with tunings selected based on highest accuracy on training and test data.
 
-Ideally we want to ensure that all ratings classes (1-5 Stars) are correctly classified. We decided that
-overall classification accuracy and individual F1 scores will be taken into account for final model
-selection criteria.
+Evaluation of candidate models will be using both accuracy and f1-score since both false positives and false negatives
+are considered equally detrimental. Performance will also be evaluated against an "all positive" baseline model. Since there
+is a large class imbalance between the negative (0) and positive (1) classes, 9% and 91% respectively, the baseline model
+will have a 91% overall accuracy.
 
 # Conclusion
 
@@ -213,31 +164,21 @@ able to slightly better predict 5-Star ratings, we opted for the Random Forest M
 a overall higher accuracy of 39% since 5 Star movies are very rare and Random Forest was able
 to better predict overall.  
 
-# Working Proof of Concept (Flask App)
-
-We have developed a working inference pipeline using the selected classification model (Random Forest) and
-developed a working Flask App that will take in a synopsis, genres and runtime as input and return
-probabilities for each Star rating (highest probability is the predicted rating).
-
-The working proof of concept, Flask App is available for use here:  
-http://b52a-104-175-34-167.ngrok.io 
-
-Please use http instead of https since we do not yet have an SSL certificate
-
 # Next Steps  
   
 We would like to further refine this project as time allows by:
-- Identifying new features
+- Introduce continuous data collection for future experiment runs to increase dataset size
 - Introduce non-linear dimensionality reduction for better generalization
-  - T-SNE
   - UMAP
-- Test more classification models
-  - Gradient Boosting Machines
-  - XGBoost
-  - Neural Networks
+- Test more CNN models as feature extractors
+  - Other RESNET variants
+  - UNET
+  - YOLO
+  - VGG
+- Introduce interpretability on the CNN model to find the most salient visual features
 
 # Code
-https://github.com/zeegeeko/ADS509-Topic-Modeling
+https://github.com/hsong1101/HTS_Imaging_Project
 
 
 
