@@ -156,11 +156,7 @@ will have a 91% overall accuracy.
 
 # Conclusion
 
-Based on overall accuracy and individual class F1 scores, the selection was very narrow between
-the tuned Random Forest model and tuned Support Vector Machines. Although, the Support Vector Machines was
-able to slightly better predict 5-Star ratings, we opted for the Random Forest Model which had
-a overall higher accuracy of 39% since 5 Star movies are very rare and Random Forest was able
-to better predict overall.  
+Despite the limitations imposed by the small dataset size, large class imbalance and time constraints, the proposed SVM classification model using RESNET50 as a feature extractor, demonstrated a measurable ability to properly classify nonviable cell cultures from 0 hour. Salient features were able to be extracted from cell culture images using RESNET50 despite being pretrained on image data unrelated to cell biology. This also demonstrates the existence of visible structures in the cell culture wells that contribute to its viability, necessitating further research into model interpretability and allowing researchers to identify the underlying cause.
 
 # Next Steps  
   
