@@ -101,7 +101,7 @@ Among around 5,000 images, 3,892 cell images were extracted without any issues.
 
 <img src="plots/Extracted.png" alt="Extracted cell images" width="500" height="500"/>
 
-Still, among those that have been successfully extracted, we had to make sure that those images were usable, meaning not too dark or too bright.
+Still among those that have been successfully extracted, we had to make sure that those images were usable, meaning not too dark or too bright.
 Using +/- two stadard deviations from the mean, we looked for any outliers and next are the examples.
 
 <img src="plots/Outliers.png" alt="outliers" width="500" height="300"/>
