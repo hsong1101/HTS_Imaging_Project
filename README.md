@@ -1,4 +1,4 @@
-# USD MADS Capstone Project - Team 14
+# USD MADS Capstone Project
 ## Predicting Cell Culture Viability using a Sequential Hybrid Model
 
 # Table of Contents
